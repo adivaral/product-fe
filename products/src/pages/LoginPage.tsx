@@ -30,7 +30,7 @@ export const LoginPage: React.FC<{}> = () => {
                     <br />
                     <label htmlFor="passWord">passWord</label>
                     <Field type="password" id="passWord" name="passWord" placeholder="passWord" />
-                    <button type="submit">Submit</button>
+                    <button type="submit">Login</button>
                 </Form>
             </Formik>
         </div>
