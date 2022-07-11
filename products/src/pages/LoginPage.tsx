@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Formik, Form, Field } from "formik";
-import axios from 'axios';
-
+import { userLogin } from "../controller/userController";
+import {message } from 'antd';
 interface MyFormValues {
     userName: string;
     passWord: string;
@@ -11,16 +11,17 @@ export const LoginPage: React.FC<{}> = () => {
     const initialValues: MyFormValues = { userName: "", passWord: "" };
     return (
         <div>
-            <h1>My Example</h1>
+            <h1>Login</h1>
             <Formik
                 initialValues={initialValues}
                 onSubmit={async (values, actions) => {
-                    console.log({ values, actions });
-                    await axios.post(`http://localhost:8000/user/new-user/login`,values).then((res:any)=>{
-                        console.log(res.data)
-                    }).catch((err:any)=>{
-                        console.log(err)
-                    })
+                   const resPonse:any=userLogin(values);
+                   console.log("res",resPonse)
+                   if(resPonse?.data){
+                    console.log("userInfo",resPonse)
+                   }else{
+                    message.error('login failed');
+                   }
                     actions.setSubmitting(false);
                 }}
             >
